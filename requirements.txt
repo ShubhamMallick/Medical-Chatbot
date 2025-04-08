@@ -1,11 +1,25 @@
-sentence-transformers==2.2.2
-langchain
+# Core dependencies
 flask
-pypdf
 python-dotenv
-pinecone[grpc]
-langchain-pinecone
+-e .
+
+# LangChain ecosystem
+langchain
 langchain_community
+langchain_pinecone
 langchain_openai
 langchain_experimental
--e .
+
+# Vector DB
+pinecone
+
+# LLMs and Transformers
+torch>=2.1.0
+transformers>=4.38
+accelerate
+
+# Embeddings
+sentence-transformers==2.2.2
+
+# PDF support
+pypdf

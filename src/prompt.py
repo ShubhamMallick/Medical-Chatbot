@@ -1,6 +1,4 @@
-# Create a more structured prompt
-prompt = (
-    f"Context: {clean_context}\n\n"
-    f"Question: {query}\n"
-    f"Answer:"
-)
+prompt_template = """You are a helpful medical assistant. Use the following context to answer the question.
+Context: {context}
+Question: {input}
+Answer:"""
