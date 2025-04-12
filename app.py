@@ -1,6 +1,6 @@
 from flask import Flask, render_template, jsonify, request
 from src.helper import download_hugging_face_embeddings
-from langchain_community.vectorstores import Pinecone as LangchainPinecone
+from langchain_pinecone import Pinecone as LangchainPinecone  # ✅ Updated import
 from langchain_openai import OpenAI
 from dotenv import load_dotenv
 from src.prompt import build_prompt
@@ -18,15 +18,15 @@ load_dotenv()
 PINECONE_API_KEY = os.getenv("PINECONE_API_KEY")
 PINECONE_INDEX_NAME = "medicalbot"
 
-# ✅ Initialize Pinecone client using v3.x
+# ✅ Initialize Pinecone client using SDK v3.x
 pc = Pinecone(api_key=PINECONE_API_KEY)
 index = pc.Index(PINECONE_INDEX_NAME)
 
-# Load embeddings
+# ✅ Load updated embeddings from helper
 embeddings = download_hugging_face_embeddings()
 
-# Use Pinecone vectorstore properly
-docsearch = LangchainPinecone(index, embeddings, "text")
+# ✅ Use updated LangChain-compatible Pinecone wrapper
+docsearch = LangchainPinecone(index, embeddings, text_key="text")
 retriever = docsearch.as_retriever(search_type="similarity", search_kwargs={"k": 3})
 
 # Load GPT-2 tokenizer and model
